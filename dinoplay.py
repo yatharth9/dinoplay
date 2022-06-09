@@ -1,3 +1,5 @@
+# Head pose Estimation code from https://github.com/niconielsen32/ComputerVision/blob/master/headPoseEstimation.py
+
 # CV2 for the video feed
 import cv2
 
@@ -20,11 +22,13 @@ mp_drawing = mp.solutions.drawing_utils
 
 drawing_spec = mp_drawing.DrawingSpec(thickness=1, circle_radius=1)
 
-# Wait for 15 seconds
-time.sleep(10)
+# Wait for 5 seconds to allow user to navigate to chrome://dino
+time.sleep(5)
 
+# Captures the video feed from your first webcam
 cap = cv2.VideoCapture(0)
 
+# Needed for PyAutoGui
 abs_x , abs_y = 0, 0
 
 while cap.isOpened():
@@ -133,8 +137,8 @@ while cap.isOpened():
             fps = 1 / totalTime
         else:
             fps = 0
-        #print("FPS: ", fps)
 
+# Putting the Space Keystroke
         time.sleep(0.1)
         diff_x = abs_x - x
         diff_y = abs_y + y
@@ -156,10 +160,11 @@ while cap.isOpened():
         abs_y = y
 
 
-    cv2.imshow('Head Pose Estimation', image)
+# What shows in the OpenCV window title
+    cv2.imshow('Dinoplay', image)
 
     if cv2.waitKey(5) & 0xFF == 27:
         break
 
-
+# Free the video capture
 cap.release()
